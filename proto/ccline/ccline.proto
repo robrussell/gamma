@@ -1,0 +1,142 @@
+// Copyright 2023 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package ccline;
+
+// All nodes must implement this service.
+// TODO - should split out Goose from internal calls.
+service Node {
+  // Respond with the address of the current cooridinator.
+  rpc Goose (GooseRequest) returns (GooseReply) {}
+
+  // Internal recording operation for this node.
+  rpc Record (RecordRequest) returns (RecordReply) {}
+
+  // Synchronous capture and reply from this node.
+  rpc LiveSample (LiveSampleRequest) returns (LiveSampleReply) {}
+
+  // Tries to shut down this node. Use the coordinator ShutdownAll to power off
+  // the entire cluster. There may be network or data-related reasons to shut
+  // nodes off in a specific sequence.
+  rpc Shutdown (ShutdownRequest) returns (ShutdownReply) {}
+}
+
+message GooseRequest {
+}
+
+message GooseReply {
+  // Name of the coordinator.
+  string id = 1;
+
+  // Informative message.
+  string message = 2;
+}
+
+enum SensorId {
+  UNKNOWN_SensorId = 0;
+  Camera1 = 1;
+  Camera2 = 2;
+  Camera3 = 3;
+  Camera4 = 4;
+  Imu1 = 5;
+  Imu2 = 6;
+  Imu3 = 7;
+  Imu4 = 8;
+}
+
+// Internal request to record.
+message RecordRequest {
+  // Sensors that should be started or continue collecting.
+  repeated SensorId start_sensor_ids = 1;
+  // Sensors that should be stopped or remain not collecting.
+  repeated SensorId stop_sensor_ids = 2;
+  // Relative path to record data under.
+  string data_path = 3;
+}
+
+message RecordReply {
+}
+
+message LiveSampleRequest {
+  repeated SensorId sensor_ids = 1;
+  // TODO: Needs format options: still or video, resolution, etc.
+}
+
+message LiveSampleReply {
+  bytes image = 1;
+}
+
+message ShutdownRequest {
+}
+
+message ShutdownReply {
+}
+
+// An external client finds and uses the coordinator to collect complete and
+// synchronized imagery and data. Most requests are routed through the
+// coordinator rather than relying on the external client to retain state about
+// all nodes.
+service Coordinator {
+  // The coordinator can accept collection-related commands.
+  rpc StartCollecting (StartCollectingRequest) returns (StartCollectingReply) {}
+  rpc StopAllCollects (StopAllCollectsRequest) returns (StopAllCollectsReply) {}
+
+  // Sequenced shutdown for all nodes. There is no programmatic way to turn the
+  // cluster back on.
+  rpc ShutdownCluster (ShutdownClusterRequest) returns (ShutdownClusterReply) {}
+}
+
+message StartCollectingRequest {
+  // Name of the folder name to hold the data from this recording.
+  string recording_id = 1;
+  repeated string recording_tag = 2;
+}
+
+message StartCollectingReply {
+  // Machine-readable success, failure, and status information.
+  enum StartCollectingResult {
+    UNKNOWN = 0;
+    OK = 1;
+    ERROR = 2;
+  }
+  // For machines
+  StartCollectingResult result = 1;
+  // For humans
+  string message = 2;
+}
+
+message StopAllCollectsRequest {
+}
+
+message StopAllCollectsReply {
+}
+
+message ShutdownClusterRequest {
+}
+
+message ShutdownClusterReply {
+  enum ShutdownResult {
+    UNKNOWN = 0;
+    OK = 1;
+    ERROR = 2;
+  }
+  // TODO: This should include an acknowledgement and the duration to wait 
+  // before cutting power to the cluster.
+  // For machines
+  ShutdownResult result = 1;
+  // For humans
+  string message = 2;
+}

@@ -1,0 +1,21 @@
+Config.coordinator_node_id='the_coordinator_node_id'
+Config.node_id='this_node_id'
+
+Resolver.name_to_ip = {
+  'name1': '127.0.0.1',
+}
+
+Resolver.name_to_port = {
+  'name1': '55151',
+}
+
+CliRunner.camera_video_cmd = [
+    'video-command-name', 'arg1', 'arg2'
+]
+
+CliRunner.camera_video_cmd = ['echo', 'no video_cmd']
+CliRunner.camera_live_sample_cmd = ['echo', 'no live_sample_cmd']
+CliRunner.dig_cmd = 'echo {hostname}'
+CliRunner.shutdown_cmd = ['echo', 'shutdown', '-h', '0', 'now']
+
+CliRunner.base_collection_path = '/home/pi/data/'

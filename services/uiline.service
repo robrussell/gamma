@@ -1,0 +1,15 @@
+[Unit]
+Description=UI for camera collection
+After=multi-user.target
+
+[Service]
+Type=idle
+User=pi
+WorkingDirectory=/home/pi/ccline/
+ExecStart=/bin/sh -c '. /home/pi/.venv/gamma/bin/activate && python /home/pi/ccline/src/ccline/ui.py --gin_configs prod.gin'
+Requires=network.target
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

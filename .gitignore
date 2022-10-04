@@ -1,0 +1,9 @@
+.DS_Store
+.venv/
+**/.venv/
+*.egg-info/**
+**/__pycache__/*
+deploy/staging/**
+jot/**
+src/*.egg-info
+src/*.egg-info/**

@@ -1,0 +1,34 @@
+include 'camera-auto.gin'
+#include 'camera-fixed.gin'
+
+CliRunner.camera_live_sample_cmd = [
+    'libcamera-still', '-o', 'live_sample.jpg', '--immediate',
+    '--nopreview', '--quality=90', '--shutter=1000',
+    '--width=3840', '--height=2160'
+]
+
+CliRunner.dig_cmd = ['dig', '+short']
+#CliRunner.dig_cmd = ['dig', '+short', f'{hostname}']
+CliRunner.base_collection_path = '/home/pi/data/'
+
+CliRunner.shutdown_cmd = ['sudo', 'shutdown', '-h', '0', 'now']
+
+Config.coordinator_node_id='gamma1'
+
+Resolver.name_to_ip = {
+  'gamma1': '10.20.0.1',
+  'gamma2': '10.20.0.2',
+  'gamma3': '10.20.0.3',
+  'gamma4': '10.20.0.4',
+  'gamma5': '10.20.0.5',
+  'gamma6': '10.20.0.6',
+}
+
+Resolver.name_to_port = {
+  'gamma1': '51151',
+  'gamma2': '51251',
+  'gamma3': '51351',
+  'gamma4': '51451',
+  'gamma5': '51551',
+  'gamma6': '51651',
+}

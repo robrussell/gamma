@@ -1,0 +1,15 @@
+[Unit]
+Description=Camera collection
+After=multi-user.target
+
+[Service]
+Type=idle
+User=pi
+WorkingDirectory=/home/pi/ccline/
+ExecStart=/bin/sh -c '. /home/pi/.venv/gamma/bin/activate && python /home/pi/ccline/scripts/run.py --server --gin_configs prod.gin --gin_configs identity.gin'
+Requires=network.target
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

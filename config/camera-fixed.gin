@@ -1,0 +1,8 @@
+# Decent indoor and overcast outdoor
+CliRunner.camera_video_cmd = [
+    'libcamera-vid', '-o', 'frame-%06d.jpg', '--timeout=0',
+    '--codec', 'mjpeg', '--nopreview', '--quality=90',
+    '--awb=daylight', '--shutter=10000',
+    '--framerate=1', '--segment=1',
+    '--width=3840', '--height=2160', '--flush'
+]

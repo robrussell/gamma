@@ -1,0 +1,16 @@
+Resolver.name_to_ip = {
+  'fakenode1': '127.0.0.1',
+  'fakenode2': '127.0.0.1',
+}
+
+Resolver.name_to_port = {
+  'fakenode1': '56151',
+  'fakenode2': '56251',
+}
+
+CliRunner.camera_video_cmd = ['echo', 'start collection cmd']
+CliRunner.camera_live_sample_cmd = ['echo', 'no live_sample_cmd']
+CliRunner.dig_cmd = 'echo {hostname}'
+CliRunner.shutdown_cmd = ['echo', 'shutdown', '-h', '0', 'now']
+
+CliRunner.base_collection_path = './fakedata'

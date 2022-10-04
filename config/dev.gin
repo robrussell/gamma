@@ -1,0 +1,24 @@
+Config.coordinator_node_id='gamma1'
+
+Resolver.name_to_ip = {
+  'gamma1': '127.0.0.1',
+  'gamma2': '127.0.0.1',
+  'gamma3': '127.0.0.1',
+  'gamma4': '127.0.0.1',
+}
+
+Resolver.name_to_port = {
+  'gamma1': '55151',
+  'gamma2': '55251',
+  'gamma3': '55351',
+  'gamma4': '55451',
+}
+
+CliRunner.camera_video_cmd = [
+    'echo', 'recording command'
+]
+
+CliRunner.camera_live_sample_cmd = ['echo', 'no live_sample_cmd']
+
+CliRunner.dig_cmd = ['echo', 'dig', '+short']
+CliRunner.base_collection_path = './jot/testing/data/'
