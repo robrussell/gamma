@@ -2,7 +2,7 @@ The Gamma Camera software environment is mainly contained in the Python library 
 
 # Setting up for development
 
-There can be quite a few computers involved with the gamma flexible camera array. To keep it clear the term _workstation_ is used to refer to the computer that you type on or the one that's generally outside the camera array (even if that computer is a laptop or yet another Raspberry Pi). Each Raspberry Pi with a camera module is called a _node_ in the cammera array. The _workstation_ is not considered to be part of the camera array even though it is an occasional participant on the network.
+There can be quite a few computers involved with the gamma flexible camera array. To keep it clear the term _workstation_ is used to refer to the computer that you type on or the one that's generally outside the camera array (even if that computer is a laptop or yet another Raspberry Pi). Each Raspberry Pi with a camera module is called a _node_ in the camera array. The _workstation_ is not considered to be part of the camera array even though it is an occasional participant on the network.
 
 1. First set up each individual Raspberry Pi with a camera module and ensure it works. 
 2. Connect each node to the wired ethernet router. Plug your workstation into the router too.

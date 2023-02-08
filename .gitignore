@@ -7,3 +7,4 @@ deploy/staging/**
 jot/**
 src/*.egg-info
 src/*.egg-info/**
+gamma.code-workspace

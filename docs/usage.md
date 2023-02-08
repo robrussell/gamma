@@ -53,7 +53,7 @@ On each node the Gamma camera server just runs the `CliRunner.camera_video_cmd` 
 
 # Hardware UI
 
-A subset of the functions are available from a display with buttons attached to one of the camera array nodes. A collection can started or stopped and some stats can be viewed while collecting imagery. The UI delegates to the same client library, similar to the client commands above so that it's easy to turn any operation performed on the commandline into a menu action.
+A subset of the functions are available from a display with buttons attached to one of the camera array nodes. A collection can be started or stopped and some stats can be viewed while collecting imagery. The UI delegates to the same client library, similar to the client commands above so that it's easy to turn any operation performed on the commandline into a menu action.
 
 ## Running ui.py at boot
 
