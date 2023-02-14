@@ -32,11 +32,11 @@ Gamma camera explicitly tries not to introduce unnecessary constraints on users.
 
 ## Getting started
 
-The Hardware guide describes the camera rig currently used for development.
+The [Hardware guide](docs/hardware.md) describes the camera rig currently used for development.
 
-The Software guide describes how to install the software on a workstation and the camera array. It's also possible to simulate the software functionality by starting multiple gammacam nodes on one workstation. The simulation is generally intended for software development but it can be used to try out the system before committing to building the hardware.
+The [Software guide](docs/software.md) describes how to install the software on a workstation and the camera array. It's also possible to simulate the software functionality by starting multiple gammacam nodes on one workstation. The simulation is generally intended for software development but it can be used to try out the system before committing to building the hardware.
 
-The Usage guide explains general operations: starting and stopping the system, recording data, and retrieving data from the system.
+The [Usage guide](docs/usage.md) explains general operations: starting and stopping the system, recording data, and retrieving data from the system.
 
 ## Contributing
 
