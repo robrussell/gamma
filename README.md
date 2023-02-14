@@ -1,6 +1,6 @@
 # Gamma Camera: a flexible camera array
 
-Gamma camera provides an open source starting point to build a flexible camera array using COTs parts.
+Gamma camera provides an open source starting point to build a flexible camera array using commodity parts.
 
 ## Project Goals
 
@@ -8,7 +8,7 @@ Gamma camera attempts to raise the floor for researchers who need to collect mul
 
 Some principles of the project:
 
-* components should be credit-card COTs whenever possible
+* components should be "commercial off-the-shelf (COTS)" whenever possible
 * rely on existing standards and norms whenever feasible
 * encourage open source hardware and software
 * reduce repetition of work unrelated to recording imagery and sensor data
