@@ -17,6 +17,7 @@ from absl import app, flags
 import cv2
 import glob
 import os
+import multiprocessing
 
 flags.DEFINE_string("path", "", "Directory to process.")
 flags.DEFINE_string("destination", "rotated", "Directory to write new files.")
@@ -24,6 +25,11 @@ flags.DEFINE_enum("angle", "90", enum_values=["90", "180", "270"],
                   help="Angle to rotate the images in degrees counterclockwise.")
 
 FLAGS = flags.FLAGS
+
+def process_helper(files, angle, flagAngleVal, flagDestVal):
+    for file in files:
+        print(file, flagAngleVal)
+        rotate(file, os.path.join(flagDestVal, os.path.split(file)[1]), angle)
 
 def rotate(image, destination, angle):
     image = cv2.imread(image)
@@ -37,9 +43,10 @@ def main(argv) -> None:
     del argv  # Unused.
     g = os.path.join(FLAGS.path, '*.jpg')
     files = glob.glob(g)
+
     if len(files) == 0:
         print(f"No files found in {g}")
-        return
+        return  
     if FLAGS.angle == "90":
         angle = cv2.ROTATE_90_CLOCKWISE
     elif FLAGS.angle == "180":
@@ -48,10 +55,22 @@ def main(argv) -> None:
         angle = cv2.ROTATE_90_COUNTERCLOCKWISE
     else:
         return
-    for file in files:
-        print(file, FLAGS.angle)
-        rotate(file, os.path.join(FLAGS.destination, os.path.split(file)[1]), angle)
-
+    
+    numProcesses = multiprocessing.cpu_count()
+    fileSlices = [[] for i in range(0, numProcesses)]
+    for i in range(0, len(files), numProcesses):
+        for j in range(0, numProcesses):
+            if i + j < len(files):
+                fileSlices[j].append(files[i + j])
+            else:
+                break
+    processes = []
+    for i in range(0, numProcesses):
+        p = multiprocessing.Process(target=process_helper, args=(fileSlices[i], angle, FLAGS.angle, FLAGS.destination))
+        processes.append(p)
+        p.start()
+    for p in processes:
+        p.join()
 
 if __name__ == "__main__":
     app.run(main)
